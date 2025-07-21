@@ -1,0 +1,17 @@
+{
+  "name": "netflix-gpt",
+  "version": "1.0.0",
+  "description": "A netflix gpt web app",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "dhruv",
+  "license": "ISC",
+  "devDependencies": {
+    "parcel": "^2.15.4"
+  },
+  "dependencies": {
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
+  }
+}
