@@ -1,4 +1,9 @@
+import Body from './Components/Body';
 function App() {
-  return <div className="bg-gray-700">Lets build Namaste-GPT</div>;
+  return (
+    <div>
+      <Body />
+    </div>
+  );
 }
 export default App;
