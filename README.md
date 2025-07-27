@@ -6,6 +6,7 @@ A hands on project.
 - Congiguring Tailwind CSS
 - Header
 - Login Form
+- Sign Up Form
 
 # Features
 
