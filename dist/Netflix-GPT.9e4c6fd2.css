@@ -283,6 +283,11 @@ img, video {
   margin-bottom: 1.5rem;
 }
 
+.my-20 {
+  margin-top: 5rem;
+  margin-bottom: 5rem;
+}
+
 .size-max {
   width: max-content;
   height: max-content;
@@ -298,6 +303,14 @@ img, video {
 
 .w-full {
   width: 100%;
+}
+
+.w-\[35\%\] {
+  width: 35%;
+}
+
+.cursor-pointer {
+  cursor: pointer;
 }
 
 .rounded-lg {
