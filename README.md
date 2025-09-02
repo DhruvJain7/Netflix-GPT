@@ -12,6 +12,11 @@ A hands on project.
 - Firebase Setup
 - Deploying our app to production
 - Create SignUp in Firebase
+- Implement Sign In user Api
+- Created Redux Store with userSlice
+- Implemented Sign out
+- Update Profile
+- Fetch from Movies
 
 # Features
 
