@@ -17,6 +17,8 @@ A hands on project.
 - Implemented Sign out
 - Update Profile
 - Fetch from Movies
+- BugFix - Sign up user display Name And Profile picture update
+- BugFix - If the user is not logged in Redirect/browse to Login Page and If the user is logged in & tries to go to login Page without sign out then redirect to Browse Page
 
 # Features
 

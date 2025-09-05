@@ -3,15 +3,46 @@ import { signOut } from 'firebase/auth';
 import { auth } from '../utils/firebase';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { onAuthStateChanged } from 'firebase/auth';
+import { useEffect } from 'react';
+import { auth } from '../utils/firebase';
+import { useDispatch } from 'react-redux';
+import { addUser, removeUser } from '../utils/userSlice';
 
 const Header = () => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        const { uid, email, displayName, photoURL } = user;
+        dispatch(
+          addUser({
+            uid: uid,
+            email: email,
+            displayName: displayName,
+            photoURL: photoURL,
+          })
+        );
+        // User is signed in, see docs for a list of available properties
+        // https://firebase.google.com/docs/reference/js/auth.user
+
+        // ...
+        navigate('/Browse');
+      } else {
+        dispatch(removeUser());
+        navigate('/');
+        // User is signed out
+        // ...
+      }
+    });
+  }, []);
+
   const navigate = useNavigate();
   const user = useSelector((store) => store.user);
   const handleSignOut = () => {
     signOut(auth)
       .then(() => {
         // Sign-out successful.
-        navigate('/');
       })
       .catch((error) => {
         // An error happened.
