@@ -1,35 +1,47 @@
 import React from 'react';
+import { addUser } from '../utils/userSlice';
 import Header from './Header';
 import { useState, useRef } from 'react';
 import { checkValidData } from '../utils/validate';
 import { auth } from '../utils/firebase';
 import { useDispatch } from 'react-redux';
 // Add this import at the top of your file
-import { addUser } from '../utils/userSlice'; // Adjust the path as needed
+// Adjust the path as needed
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   updateProfile,
 } from 'firebase/auth';
 import { auth } from '../utils/firebase';
-import { useNavigate } from 'react-router-dom';
+import { Default_Icon } from '../utils/constants';
+
 const Login = () => {
   const [isSignInForm, setIsSignInForm] = useState(true);
   const [errorMessage, setErrorMessage] = useState(null);
-  const navigate = useNavigate();
+
+  const dispatch = useDispatch();
   const email = useRef(null);
   const password = useRef(null);
   const name = useRef(null);
-  const dispatch = useDispatch();
+  // validation
   const handleButtonClick = () => {
-    const message = checkValidData(
-      email.current.value,
-      password.current.value,
-      name.current.value
-    );
+    const message = checkValidData(email.current.value, password.current.value);
     setErrorMessage(message);
+    console.log(name.current.value);
+    console.log(email.current.value);
     if (message) return;
-    console.log('Validation Successful');
+
+    //     user.updateProfile({
+    //   highscore: score
+    // }).then(() => {
+    //   console.log('Update successful');
+    //   user.currentUser.reload().then(() => {
+    //     console.log('Profile reloaded');
+    //   });
+    // }).catch((error) => {
+    //   console.log('Update unsuccessful' + error);
+    // });
+
     if (!isSignInForm) {
       // Sign up logic
       createUserWithEmailAndPassword(
@@ -38,16 +50,19 @@ const Login = () => {
         password.current.value
       )
         .then((userCredential) => {
-          // Signed up
           const user = userCredential.user;
-          updateProfile(user, {
+
+          updateProfile(auth.currentUser, {
             displayName: name.current.value,
             photoURL:
-              'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSp5POyP8-RE2-aNzpcozUhfTCpnagh3i9lHg&s',
+              'https://images.pexels.com/photos/5473311/pexels-photo-5473311.jpeg',
           })
             .then(() => {
-              // Profile updated!
-              // ...
+              console.log('Update successful');
+              user.currentUser.reload();
+            })
+            .then(() => {
+              console.log(user);
               const { uid, email, displayName, photoURL } = auth.currentUser;
               dispatch(
                 addUser({
@@ -59,10 +74,9 @@ const Login = () => {
               );
             })
             .catch((error) => {
-              // An error occurred
-              // ...
+              setErrorMessage(error.message);
             });
-
+          console.log('after update');
           // ...
         })
         .catch((error) => {
@@ -80,8 +94,7 @@ const Login = () => {
         .then((userCredential) => {
           // Signed in
           const user = userCredential.user;
-          console.log(user);
-          navigate('/Browse');
+
           // ...
         })
         .catch((error) => {

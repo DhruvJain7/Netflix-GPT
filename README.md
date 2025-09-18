@@ -19,6 +19,8 @@ A hands on project.
 - Fetch from Movies
 - BugFix - Sign up user display Name And Profile picture update
 - BugFix - If the user is not logged in Redirect/browse to Login Page and If the user is logged in & tries to go to login Page without sign out then redirect to Browse Page
+- Register TMDB API & create an app & get access token
+- Get data from TMDB API
 
 # Features
 
